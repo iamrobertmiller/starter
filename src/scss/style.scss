@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+@import "vars";
+@import "mixins";
+
+@import "libs/gravity-forms/gravity-forms";
+@import "libs/gravity-forms/gravity-forms-custom-select";
+@import "libs/gravity-forms/gravity-forms-chosen";
+@import "libs/gravity-forms/gravity-forms-datepicker-defaults";
+
+img {
+	width: auto;
+	height: auto;
+	&,
+	&[height],
+	&[width] {
+		max-width: 100%;
+	}
+	&.fullwidth {
+		width: 100%;
+	}
+	&.aligncenter {
+		display: block;
+		margin: $half-spacing-unit auto $base-spacing-unit;
+	}
+	&.alignleft {
+		float: left;
+		margin: $half-spacing-unit $base-spacing-unit $base-spacing-unit 0;
+	}
+	&.alignright {
+		float: right;
+		margin: $half-spacing-unit 0 $base-spacing-unit $base-spacing-unit;
+	}
+}
+
+/**
+ * She’s all yours... Begin importing your stuff here.
+ */
+

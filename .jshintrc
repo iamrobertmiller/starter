@@ -1,0 +1,32 @@
+{
+	"asi": true,
+	"boss": true,
+	"curly": true,
+	"eqeqeq": true,
+	"eqnull": true,
+	"immed": true,
+	"indent": 2,
+	"latedef": true,
+	"laxbreak": true,
+	"newcap": true,
+	"noarg": true,
+	"sub": true,
+	"undef": true,
+	"unused": false,
+	"node": true,
+	"globals": {
+		"global_vars": true,
+		"navigator": true,
+		"Image": true,
+		"Modernizr": true,
+		"debounce": true,
+		"_gaq": true,
+		"ga": true,
+		"console": true,
+		"alert": true,
+		"document": true,
+		"window": true,
+		"jQuery": true,
+		"$": true
+	}
+}

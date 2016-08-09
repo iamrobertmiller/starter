@@ -1,0 +1,45 @@
+/*
+http://adam.co/lab/jquery/customselect/
+*/
+.customSelect {
+	padding: 5px $half-spacing-unit;
+
+	background-color: $input-bg-color;
+	color: $input-text-color;
+	border: 1px solid $input-border-color;
+	border-radius: $border-radius;
+	max-width: 100%;
+
+	&.changed {
+		background-color: $input-bg-color;
+	}
+}
+
+.customSelect.customSelectHover {
+	/* Styles for when the select box is hovered */
+}
+
+.customSelect.customSelectOpen {
+	/* Styles for when the select box is open */
+}
+
+.customSelect.customSelectFocus {
+	/* Styles for when the select box is in focus */
+	outline: none;
+	border-color: $input-focus-border-color;
+}
+
+.customSelect.customSelectDisabledOption {
+	/* Styles for when the selected item is a disabled one */
+}
+
+.customSelect.customSelectDisabled {
+	/* Styles for when the select box itself is disabled */
+}
+
+.customSelectInner {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAICAYAAAD9aA/QAAAAfElEQVQoFZXRgQ2AIAwEwI7AKIzESIzACIzCCI7gBvUxhWDFtJp8REqPCEREBeEfKcxMVu4FQJsTbhY46gMOgA8D7/UwGq33/CU0ReREdsfS56OFrfUJ90k8CdnBaW3yjB+w4Fnh2QPpNS9Y8Cp41Q3e7y84AC6I+7L0hhc28oiRLYTxoAAAAABJRU5ErkJggg==);
+	background-position: right 50%;
+	background-repeat: no-repeat;
+	max-width: 100%;
+}

@@ -1,0 +1,1207 @@
+//////////////////////////////////////
+//
+//  VARS
+//
+//////////////////////////////////////
+
+$base-ui-color: black;
+$primary-color: blue;
+
+$border-radius: 3px;
+$base-spacing-unit: 20px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$base-font-size: 14px;
+$base-line-height: 18px;
+
+$placeholder-color: grey;
+$error-color: red;
+$success-color: green;
+
+$input-border-color: black;
+$input-bg-color: white;
+$input-text-color: $base-ui-color;
+
+
+$base-input-height: 40px;
+$label-font-size: $base-font-size;
+
+$input-glow-color: rgba($primary-color, 0);
+$input-focus-border-color: $primary-color;
+$input-focus-glow-color: rgba($primary-color, .15);
+
+$section-title-background: grey;
+$section-title-color: white;
+
+$page-steps-color: $base-ui-color;
+$page-steps-active-color: $primary-color;
+
+$form-footer-border-top: none;//1px dashed $base-ui-color;
+
+@mixin btn-primary {
+	// primary button styles
+}
+
+@mixin btn-secondary {
+	// secondary button styles
+}
+
+@mixin clearfix {
+	&:after{
+		content:"";
+		display:table;
+		clear:both;
+	}
+}
+
+@mixin sprite-icon($w:16px, $h:16px, $img:'') {
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    vertical-align: middle;
+    zoom: 1;
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    width: $w;
+    height: $h;
+    top: -1px;
+    overflow: hidden;
+   *text-indent: -9999px;
+	background-repeat: no-repeat;
+	background-image: url($img);
+    &:before {
+        content: "";
+        display: block;
+        width: 0;
+        height: 100%;
+    }
+}
+
+@mixin text-input {
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	background: $input-bg-color;
+	border: 1px solid $input-border-color;
+	color: $input-text-color;
+
+	padding: 6px $base-spacing-unit;
+	height: $base-input-height;
+	vertical-align: middle;
+
+	font-size: $base-font-size;
+	line-height: 1.42857143;
+
+	//box-shadow: inset 0 1px 1px $input-glow-color;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	cursor: default;
+	border-radius: $border-radius;
+
+	&.placeholder {
+		color: $placeholder-color;
+	}
+	&:focus {
+		outline: none;
+		border-color: $input-focus-border-color;
+		//box-shadow: inset 0 1px 0 $input-focus-glow-color,0 0 8px $input-focus-glow-color;
+	}
+	&:hover {
+		cursor: text;
+	}
+}
+
+@mixin accessibility {
+	border: 0 !important;
+	clip: rect(0 0 0 0) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+}
+
+//////////////////////////////////////
+//
+//  GLOBALS
+//
+//////////////////////////////////////
+
+.gform_fields {
+	@include clearfix;
+	list-style: none;
+	margin: 0;
+	padding-left: 0 !important;
+}
+
+
+
+.gfield {
+	clear: both;
+
+	img {
+		width: auto;
+		height: auto;
+	}
+
+	input {
+		border-radius: $border-radius;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: $base-spacing-unit;
+	}
+}
+
+.gfield label,
+.gpoll_field_label {
+	font-size: $label-font-size;
+	margin-bottom: 2px;
+}
+
+
+//////////////////////////////////////
+//
+//  PLACEHOLDERS
+//
+//////////////////////////////////////
+
+::-webkit-input-placeholder {
+	color: $placeholder-color;
+}
+::-moz-placeholder {
+	color: $placeholder-color;
+}
+:-ms-input-placeholder {
+	color: $placeholder-color;
+}
+input:-moz-placeholder {
+	color: $placeholder-color;
+}
+
+//////////////////////////////////////
+//
+//  TEXT BASED INPUTS
+//
+//////////////////////////////////////
+
+.gform_fields textarea,
+.gform_fields input[type="text"],
+.gform_fields input[type="password"],
+.gform_fields input[type="name"],
+.gform_fields input[type="email"],
+.gform_fields input[type="url"],
+.gform_fields input[type="tel"],
+.gform_fields input[type="color"],
+.gform_fields input[type="number"] {
+	@include text-input;
+}
+
+.gform_fields textarea {
+	height: 120px;
+	resize: vertical;
+}
+
+
+//////////////////////////////////////
+//
+//  FILE
+//
+//////////////////////////////////////
+.gform_fields .file {
+	min-height: 43px;
+	.ginput_container {
+		position: relative;
+	}
+	.btn {
+		width: 100%;
+		max-width: 100%;
+		height: $base-input-height;
+		line-height: $base-input-height;
+	}
+	input[type="file"] {
+		width: 100%;
+		max-width: 100%;
+		position: absolute;
+		z-index: 2;
+		height: $base-input-height;
+		padding: 0;
+		color: white;
+		font-weight: normal;
+		font-size: small;
+		opacity: 0;
+		cursor: pointer;
+	}
+}
+.ginput_container_fileupload {
+	input[type="file"] {
+		color: $placeholder-color;
+	}
+}
+
+
+//////////////////////////////////////
+//
+//  SELECT
+//
+//////////////////////////////////////
+
+.gfield select {
+	border-radius: $border-radius;
+	-webkit-appearance: none;
+	width: 100%;
+	&:focus {
+		outline: none;
+	}
+}
+.gfield select[multiple] {
+	padding: $base-spacing-unit / 2;
+}
+
+
+//////////////////////////////////////
+//
+//  ENHANCED SELECT (CHOSEN / CHZN)
+//
+//////////////////////////////////////
+
+// enhanced UI/select styles updated in v.1.8.12
+
+.gform_wrapper .chosen-container-multi .chosen-choices li.search-field input[type=text] {
+	height: $base-input-height;
+}
+.gform_wrapper .chosen-container .chosen-drop {
+	color: $input-text-color;
+}
+
+//////////////////////////////////////
+//
+//  RADIOS / CHECKBOXES
+//
+//////////////////////////////////////
+
+ul.gfield_radio,
+ul.gfield_checkbox {
+	list-style: none;
+	margin: 0;
+	padding: $base-spacing-unit/2 0 0 0;
+
+	li, label {
+		display: inline-block;
+		margin: 0;
+
+		font-size: $label-font-size;
+		vertical-align: top;
+	}
+	label {
+		margin-left: 8px;
+		max-width: 85%;
+	}
+	li {
+		width: auto;//25%;
+		margin-bottom: 10px;
+	}
+
+	li:not(:last-child) {
+		margin-right: $base-spacing-unit;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		vertical-align: top;
+		margin-top: 6px;
+		&[value="gf_other_choice"] {
+			margin-top: 14px;
+		}
+	}
+	input[value="gf_other_choice"] + input[type="text"] {
+		display: inline-block;
+		width: 80%;
+		margin-left: $base-spacing-unit;
+	}
+}
+
+.list-vertical {
+	ul.gfield_radio,
+	ul.gfield_checkbox {
+		li {
+			display: block;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+}
+
+
+//TODO: Tablet breakpoint
+@media screen and (max-width: 769px) {
+
+	ul.gfield_radio,
+	ul.gfield_checkbox {
+		li {
+			width: 30.333333%;
+		}
+	}
+
+}
+
+//TODO: Mobile breakpoint
+@media screen and (max-width: 420px) {
+	ul.gfield_radio,
+	ul.gfield_checkbox {
+		li {
+			width: 50%;
+		}
+	}
+}
+
+
+//////////////////////////////////////
+//
+//  DATE FIELDS
+//
+//////////////////////////////////////
+
+.gfield_date_day,
+.gfield_date_month,
+.gfield_date_year,
+.gfield_date_dropdown_day,
+.gfield_date_dropdown_month,
+.gfield_date_dropdown_year,
+.gfield_time_hour,
+.gfield_time_minute,
+.gfield_time_ampm {
+	display: inline-block !important;
+	width: 30% !important;
+	margin-right: 3.333%;
+	i,
+	label {
+		display: inline-block;
+		font-size: $label-font-size;
+		color: lighten($input-text-color, 15%);
+	}
+}
+.gfield_date_year,
+.gfield_date_dropdown_year,
+.gfield_time_ampm {
+	margin-right: 0;
+}
+.gfield_time_hour input {
+	display: inline-block;
+	max-width: 90%;
+}
+.gfield_time_ampm {
+	display: block;
+	float: right;
+}
+
+.gf_hide_ampm .gfield_time_ampm {
+	display: none !important;
+}
+.ginput_container.ginput_container_date {
+	position: relative;
+	input {
+		padding-right: $base-spacing-unit * 3;
+	}
+}
+
+.ui-datepicker-trigger {
+	display: block;
+	position: absolute;
+	right: $base-spacing-unit;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.gfield .clear-multi {
+	height: $base-input-height;
+	> .ginput_container:last-child {
+		float: right;
+	}
+}
+
+//////////////////////////////////////
+//
+//  PAYMENT FIELDS
+//
+//////////////////////////////////////
+
+.ginput_full,
+.ginput_card_expiration_container {
+	@include clearfix();
+	margin-bottom: 4px;
+	display: block;
+	width: 100%;
+	input {
+		width: 100%;
+	}
+}
+
+.ginput_left,
+.ginput_cardinfo_left,
+.ginput_card_expiration_container .styled-select:first-of-type {
+	margin-bottom: 4px;
+	display: inline-block;
+	width: 50%;
+	padding-right: $half-spacing-unit;
+	float: left;
+	input {
+		width: 100%;
+	}
+}
+
+.ginput_right,
+.ginput_cardinfo_right,
+.ginput_card_expiration_container .styled-select:last-of-type {
+	margin-bottom: 4px;
+	display: inline-block;
+	width: 50%;
+	padding-left: 10px;
+	float: right;
+	clear: none;
+	input {
+		width: 100%;
+	}
+}
+
+.gfield_required {
+	padding-left: 4px;
+}
+
+
+.gform_card_icon_container {
+	margin-bottom: 6px;
+}
+
+.ginput_card_security_code_icon,
+.gform_card_icon {
+	@include sprite-icon(32px, 24px, '../../../plugins/gravityforms/images/gf-creditcard-icons.png');
+}
+
+.ginput_card_security_code {
+	margin-bottom: 6px;
+}
+.ginput_card_security_code_icon {
+	background-position: 0 -128px;
+	+ label {
+		display: inline-block;
+		margin-left: 10px;
+	}
+}
+
+.gform_card_icon {
+	margin-left: 6px;
+
+	&:first-child {
+		margin-left: 0;
+	}
+
+	&.gform_card_icon_visa {
+		background-position: -2px -4px;
+	}
+	&.gform_card_icon_mastercard {
+		background-position: -38px -4px;
+	}
+	&.gform_card_icon_amex {
+		background-position: -74px -4px;
+	}
+}
+
+
+
+//////////////////////////////////////
+//
+//  SECTION BREAKS
+//
+//////////////////////////////////////
+
+.gform_title,
+.gsection_title {
+	margin-bottom: 0;
+	line-height: 1;
+}
+
+.gsection_title {
+	font-size: 18px;
+	background: $section-title-background;
+	padding: 13px;
+	border-radius: 4px 4px 0 0;
+	color: $section-title-color;
+	margin-top: $base-spacing-unit;
+	&:empty {
+		@include accessibility;
+	}
+}
+
+.gsection_description {
+	padding: 14px 14px 0;
+}
+
+.gform_description {
+	display: block;
+	padding-top: $base-spacing-unit;
+}
+
+//////////////////////////////////////
+//
+//  PAGE BREAKS
+//
+//////////////////////////////////////
+
+.gf_page_steps {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	border-radius: $border-radius;
+	overflow: auto;
+	padding-left: $base-spacing-unit/2;
+}
+.gf_step {
+	float: left;
+	margin-right: 40px;
+	font-size: 16px;
+	line-height: 60px;
+	a {
+		color: $page-steps-color;
+	}
+	&.gf_step_active {
+		color: $page-steps-active-color;
+	}
+}
+
+.gf_progressbar_wrapper {
+	padding: $base-spacing-unit 0;
+	margin-bottom: $base-spacing-unit;
+}
+
+.gf_progressbar_title {
+	font-size: $base-font-size + 8px;
+	margin-bottom: $half-spacing-unit;
+	color: $primary-color;
+}
+
+.gf_progressbar {
+	background: transparent;
+	height: $base-spacing-unit;
+	overflow: hidden;
+	border: 1px solid $primary-color;
+	border-radius: $border-radius;
+}
+.gf_progressbar_percentage {
+	background: $primary-color;
+	height: $base-spacing-unit - 6;
+	margin: 2px;
+	border-radius: $border-radius;
+	span {
+		@include accessibility;
+	}
+}
+
+.gform_page_footer {
+	@include clearfix;
+	padding: $base-spacing-unit 0;
+	margin: $base-spacing-unit 0;
+	.gform_previous_button,
+	.gform_next_button {
+		@include btn-secondary;
+		float: right;
+	}
+	.gform_previous_button {
+		float: left;
+	}
+}
+
+.gform_page .gform_page_footer {
+	text-align: center;
+	min-height: 100px;
+	position: relative;
+	.gform_ajax_spinner {
+		float: none;
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 60px;
+		transform: translateX(-50%);
+	}
+	input[type="submit"] {
+		float: right;
+	}
+}
+
+.gform_page:first-child .gform_page_footer {
+	.gform_save_link {
+		float: left;
+	}
+	.gform_ajax_spinner {
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+
+.gform_page:not(:first-child) .gform_page_footer {
+	.gform_ajax_spinner {
+		top: 25px;
+	}
+	.gform_save_link {
+		display: block;
+		clear: both;
+		margin-top: 100px;
+	}
+}
+
+.submit-on-left .gform_page .gform_page_footer input[type="submit"] {
+	float: left;
+}
+
+.gform_save_link {
+	display: inline-block;
+	margin-top: 15px;
+}
+
+//TODO: Mobile breakpoint
+@media screen and (max-width: 420px) {
+
+	.gform_page:not(:first-child) .gform_page_footer {
+		.gform_ajax_spinner {
+			top: 100px;
+		}
+		.gform_save_link {
+			margin-top: 150px;
+		}
+	}
+}
+
+
+//////////////////////////////////////
+//
+//  LIST FIELD
+//
+//////////////////////////////////////
+
+.gfield_list {
+	margin-bottom: 0;
+	thead + tbody tr:first-child td {
+		padding-top: $base-spacing-unit;
+		&.gfield_list_icons {
+			padding-top: $base-spacing-unit !important;
+		}
+	}
+	tr {
+		border-bottom: 0;
+	}
+}
+.gfield_list td {
+	padding-top: 0;
+}
+.gfield_list_cell {
+	padding-left: $base-spacing-unit / 2;
+	padding-right: $base-spacing-unit / 2;
+	input {
+		width: 100%;
+	}
+	&:first-child {
+		padding-left: 0;
+	}
+}
+.gfield_list_icons {
+	text-align: right;
+	padding-right: 0;
+	width: 60px;
+	padding-top: $half-spacing-unit !important;
+}
+
+
+//////////////////////////////////////
+//
+//  SURVEY FIELDS
+//
+//////////////////////////////////////
+
+.gsurvey-survey-field {
+
+	.gsurvey-rating-wrapper {
+		@include clearfix;
+	}
+
+	table.gsurvey-likert {
+		tbody tr {
+			border-bottom: none;
+		}
+		td.gsurvey-likert-choice {
+			&.gsurvey-likert-hover {
+				background-color: lighten($primary-color, 30%);
+			}
+			&.gsurvey-likert-selected {
+				background-color: $primary-color;
+			}
+		}
+
+	}
+
+	.gsurvey-rank {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li {
+			margin: 0 0 $base-spacing-unit / 2;
+		}
+	}
+	.gsurvey-rank-choice img {
+		position: relative;
+		top: 2px;
+	}
+
+}
+
+
+
+//////////////////////////////////////
+//
+//  POLL FIELDS
+//
+//////////////////////////////////////
+
+.gform_footer .gpoll_button,
+.gform_wrapper .gpoll_back_button {
+	@include btn-primary;
+	margin-left: 0;
+}
+.gform_wrapper.gpoll_enabled .gform_footer {
+	text-align: center;
+	.gform_ajax_spinner {
+		float: none;
+		display: inline-block;
+	}
+	input[type="submit"] {
+		float: left;
+	}
+	.gpoll_button {
+		float: right;
+	}
+}
+.gform_wrapper.gpoll_enabled.submit-on-right .gform_page .gform_page_footer input[type="submit"] {
+	float: right;
+	.gpoll_button {
+		float: left;
+	}
+}
+
+.gpoll_enabled .gpoll_summary,
+#gforms_confirmation_message .gpoll_container {
+
+	@include clearfix;
+
+	.gpoll_bar_juice {
+		box-shadow: none;
+		border-radius: 0;
+
+		background-color: $primary-color;
+		background-image: none;
+	}
+
+	.gpoll_ratio_box {
+		background: $primary-color;
+		border-radius: 0;
+	}
+
+	.gpoll_bar_count {
+		text-shadow: none;
+	}
+
+	.gpoll_back_button {
+		margin-top: $base-spacing-unit;
+		float: left;
+	}
+
+	.gpoll_choice_label.gpoll_value_selected {
+		color: $primary-color;
+	}
+
+}
+#gforms_confirmation_message .gpoll_container {
+	margin-bottom: $base-spacing-unit;
+}
+
+//////////////////////////////////////
+//
+//  COMPLEX (eg FULL ADDRESS BLOCK)
+//
+//////////////////////////////////////
+
+.ginput_complex {
+	> span {
+		display: block;
+		margin-bottom: $base-spacing-unit;
+	}
+	label {
+		font-size: $label-font-size;
+		color: lighten($input-text-color, 15%);
+		padding-top: 4px;
+	}
+}
+
+
+//////////////////////////////////////
+//
+//  FIELD DESCRIPTION / INSTRUCTION
+//
+//////////////////////////////////////
+
+.gfield_description,
+.gform_fields .instruction {
+	color: $placeholder-color;
+	font-size: $base-font-size - 1;
+	font-style: italic;
+}
+.gform_fields .instruction {
+	padding-top: 4px;
+}
+
+
+//////////////////////////////////////
+//
+//  VALIDATION
+//
+//////////////////////////////////////
+
+.validation_error,
+.gfield_description.validation_message,
+.gfield_error .gfield_label {
+	font-style: normal;
+	padding: 0;
+	font-size: $label-font-size;
+	color: $error-color;
+	background: none;
+}
+
+.gfield_error {
+	input.text-input,
+	textarea,
+	input[type="text"],
+	input[type="password"],
+	input[type="name"],
+	input[type="email"],
+	input[type="url"],
+	input[type="tel"],
+	input[type="color"],
+	input[type="number"],
+	&.text-input input,
+	&.text-input textarea {
+		border-color: $error-color;
+		background-color: $input-bg-color;
+		color: $error-color;
+	}
+	.styled-select,
+	.customSelect {
+		border-color: $error-color;
+		color: $error-color;
+	}
+}
+
+.gform_heading {
+	padding-bottom: $base-spacing-unit;
+}
+
+.validation_error {
+	margin-bottom: $base-spacing-unit;
+	background: $error-color;
+	padding: 8px $base-spacing-unit;
+	border-radius: $border-radius;
+	color: white;
+}
+
+.gfield_description.validation_message {
+	display: none;
+}
+
+#gforms_confirmation_message {
+	margin-bottom: $base-spacing-unit;
+}
+
+
+//////////////////////////////////////
+//
+//  PASSWORD STRENGTH
+//
+//////////////////////////////////////
+
+.gform_wrapper .gfield_password_strength {
+	border: 1px solid grey;
+	margin: 0;
+	padding: 13px;
+	text-align: center;
+	min-width: 200px;
+	width: 100%;
+	background-color: #EEE;
+	color: grey;
+	clear: both;
+	border-radius: $border-radius;
+
+	&.bad {
+		background-color: lighten(#FF853C, 30%);
+		border-color: #FF853C;
+		color: #FF853C;
+	}
+	&.good {
+		background-color: lighten(#FC0, 30%);
+		border-color: #FC0;
+		color: darken(#FC0, 10%);
+	}
+	&.strong {
+		background-color: green;
+		border-color: green;
+		color: #fff;
+	}
+	&.short,
+	&.mismatch {
+		background-color: lighten(#f04040, 30%);
+		border-color: #f04040;
+		color: #f04040;
+	}
+}
+
+
+
+//////////////////////////////////////
+//
+//  FOOTER
+//
+//////////////////////////////////////
+
+.gform_footer {
+	@include clearfix;
+	border-top: $form-footer-border-top;
+	padding: $base-spacing-unit 0 0;
+	input[type="submit"] {
+		float: right;
+	}
+	.gform_ajax_spinner {
+		float: left;
+	}
+}
+.submit-on-left .gform_footer {
+	input[type="submit"] {
+		float: left;
+	}
+	.gform_ajax_spinner {
+		float: right;
+	}
+}
+
+.gform_ajax_spinner {
+	display: block;
+	width: 40px;
+	height: 40px;
+	//margin-top: 10px;
+}
+
+//////////////////////////////////////
+//
+//  SECURITY (eg HONEYPOT) FIELD
+//  HIDDEN FIELDS
+//
+//////////////////////////////////////
+
+.gform_validation_container {
+	display: none;
+}
+
+.gform_hidden {
+	display: none !important;
+}
+
+
+//////////////////////////////////////
+//
+//  SUBMITS
+//
+//////////////////////////////////////
+
+.gform_fields input[type="button"],
+.gform_wrapper form input[type="submit"] {
+	@include btn-primary;
+	/*
+	text-align: left;
+	min-width: 20%;
+	*/
+}
+
+.gform_wrapper form input[type="submit"][disabled="disabled"],
+.gform_page_footer .gform_next_button[disabled="disabled"] {
+	cursor: default;
+	opacity: 0.3;
+}
+
+//////////////////////////////////////
+//
+//  LAYOUT CLASSES
+//
+//////////////////////////////////////
+
+.gfield.gf_fourth_one,
+.gfield.gf_fourth_two,
+.gfield.gf_fourth_three,
+.gfield.gf_fourth_four,
+.gfield.gf_left_third,
+.gfield.gf_middle_third,
+.gfield.gf_right_third,
+.gfield.gf_right_two_thirds,
+.gfield.gf_left_half,
+.gfield.gf_right_half {
+	float: left;
+}
+
+
+.gfield.gf_fourth_four,
+.gfield.gf_right_third,
+.gfield.gf_right_two_thirds,
+.gfield.gf_right_half {
+	float: right;
+}
+
+.gfield.gf_left_half,
+.gfield.gf_right_half {
+	width: 50%;
+}
+
+.gfield.gf_left_third,
+.gfield.gf_middle_third,
+.gfield.gf_right_third {
+	width: 33.333%;
+}
+.gfield.gf_right_two_thirds {
+	width: 66.666%;
+}
+
+.gfield.gf_fourth_one,
+.gfield.gf_fourth_two,
+.gfield.gf_fourth_three,
+.gfield.gf_fourth_four {
+	width: 25%;
+}
+
+.gfield.gf_fourth_one,
+.gfield.gf_left_third,
+.gfield.gf_left_half {
+	padding-right: $base-spacing-unit / 2;
+}
+
+.gfield.gf_fourth_two {
+	padding-right: $base-spacing-unit / 4;
+}
+.gfield.gf_fourth_three {
+	padding-left: $base-spacing-unit / 4;
+}
+
+.gfield.gf_fourth_four,
+.gfield.gf_right_third,
+.gfield.gf_right_two_thirds,
+.gfield.gf_right_half {
+	padding-left: $base-spacing-unit / 2;
+}
+
+
+.gfield.gf_fourth_one,
+.gfield.gf_fourth_two,
+.gfield.gf_fourth_three,
+.gfield.gf_fourth_four,
+.gfield.gf_middle_third,
+.gfield.gf_right_third,
+.gfield.gf_right_two_thirds,
+.gfield.gf_right_half {
+	clear: none;
+}
+
+//TODO: Tablet breakpoint
+@media screen and (max-width: 769px) {
+
+	.gfield.gf_left_third,
+	.gfield.gf_middle_third,
+	.gfield.gf_right_third,
+	.gfield.gf_right_two_thirds {
+		float: left;
+		width: 50%;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.gfield.gf_left_third {
+		padding-right: $base-spacing-unit / 2;
+	}
+
+}
+
+//TODO: Mobile breakpoint
+@media screen and (max-width: 420px) {
+
+	.gfield.gf_left_third,
+	.gfield.gf_middle_third,
+	.gfield.gf_right_third,
+	.gfield.gf_right_two_thirds,
+	.gfield.gf_left_half,
+	.gfield.gf_right_half {
+		float: none;
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.gfield.gf_fourth_one,
+	.gfield.gf_fourth_two,
+	.gfield.gf_fourth_three,
+	.gfield.gf_fourth_four {
+		float: none;
+		padding-right: 0;
+		padding-left: 0;
+		width: 50%;
+	}
+
+	.gfield.gf_fourth_one,
+	.gfield.gf_fourth_three {
+		float: left;
+		padding-right: $base-spacing-unit / 4;
+	}
+	.gfield.gf_fourth_two,
+	.gfield.gf_fourth_four {
+		float: right;
+		padding-left: $base-spacing-unit / 4;
+	}
+
+	.gfield.gf_fourth_three {
+		clear: both;
+	}
+
+	.gfield.gf_fourth_two,
+	.gfield.gf_fourth_four {
+		padding-right: 0;
+	}
+
+}
+
+
+
+//////////////////////////////////////
+//
+//  CUSTOM GF CLASSES
+//
+//////////////////////////////////////
+
+.gfield.no-label {
+	> .gfield_label {
+		display: none;
+	}
+}
+.gfield.single-option {
+	.check-list,
+	ul.gfield_radio,
+	ul.gfield_checkbox {
+		li {
+			width: 100%;
+		}
+	}
+}
+
+.gfield.offscreen {
+	@include accessibility;
+}
