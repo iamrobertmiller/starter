@@ -29,6 +29,8 @@ The `/js/vendor/` folder contains a README with some info.
 
 Avoid images residing in the css folder. Prefer them in their own folder in the theme/site root (paths in css would change to `../images/`)
 
+_All icons and logos should be SVG, not jpg or png._
+
 ####Fonts####
 
 Avoid fonts residing in the css folder. Prefer them in their own folder in the theme/site root (paths in the css would change to `../fonts/`)
